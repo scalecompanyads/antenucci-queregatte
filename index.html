@@ -166,8 +166,8 @@ footer img{height:64px;width:auto;margin:0 auto 16px}
   .hero-media{width:calc(100% - 10px);max-width:420px}
   .hero-media img{aspect-ratio:16/10;max-height:24vh;object-position:50% 45%}
   .hero-media::before{inset:-8px -8px 8px 8px}
-  .hero .eyebrow{flex-direction:column;gap:10px}
-  .hero .eyebrow::before{order:2;width:44px}
+  .hero .eyebrow{justify-content:center;gap:10px;letter-spacing:.16em;font-size:.72rem;white-space:nowrap}
+  .hero .eyebrow::before,.hero .eyebrow::after{content:"";width:24px;height:1px;background:var(--gold-grad);flex:none}
   .hero .lead{margin-left:auto;margin-right:auto}
   .team{max-width:520px;padding-left:10px}
 }
@@ -177,7 +177,7 @@ footer img{height:64px;width:auto;margin:0 auto 16px}
   .hero header{padding:18px 0 0}
   .hero header img{height:66px}
   .hero-grid{padding-top:22px;gap:24px}
-  .hero h1{font-size:1.75rem;margin:12px 0 12px}
+  .hero h1{font-size:min(1.95rem,8vw);margin:12px 0 12px}
   .hero .lead{font-size:.97rem;margin-bottom:20px}
   .cases{grid-template-columns:1fr;gap:12px;margin:36px 0}
   .case{padding:22px 20px}
