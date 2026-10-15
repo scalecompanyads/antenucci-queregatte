@@ -51,10 +51,6 @@ a{color:inherit}
 .tex-dark::after{background-image:var(--fiber-tex);mix-blend-mode:soft-light;opacity:.18}
 
 /* ---------- Tipografia ---------- */
-.eyebrow{font-family:"Cinzel",serif;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px}
-.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold-grad)}
-.center .eyebrow{justify-content:center}
-.center .eyebrow::after{content:"";width:34px;height:1px;background:var(--gold-grad)}
 h1,h2,h3{text-wrap:balance}
 p,li{text-wrap:pretty}
 h1,h2{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:1.08;letter-spacing:-.005em}
@@ -62,7 +58,6 @@ h1{font-size:clamp(1.9rem,3.6vw,2.75rem)}
 h2{font-size:clamp(2rem,4.2vw,3rem)}
 h1 em,h2 em{font-style:italic;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tex-light h1 em,.tex-light h2 em{background:linear-gradient(135deg,#7a5418 0%,#a8782e 50%,#8a6020 100%);-webkit-background-clip:text;background-clip:text}
-.tex-light .eyebrow{color:#93682a}
 .lead{font-size:1.08rem;max-width:560px}
 strong{font-weight:700;color:var(--navy)}
 .tex-dark strong{color:#fbf6ea}
@@ -89,26 +84,42 @@ section{padding:88px 0}
 .hero h1{color:var(--navy);margin:20px 0}
 .hero h1 em{display:block}
 .hero .lead{color:var(--muted);margin-bottom:32px}
-.hero-media{position:relative;width:100%;max-width:440px;justify-self:end}
-.hero-media::before{content:"";position:absolute;inset:-14px -14px 14px 14px;border:1px solid var(--gold);opacity:.7}
-.hero-media img{position:relative;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:2px;box-shadow:0 30px 60px -30px rgba(14,28,63,.45)}
+/* hero: foto dos advogados como fundo, ancorada no topo e à direita */
+.hero{overflow:hidden;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+.hero.tex-light::before,.hero.tex-light::after{display:none}
+.hero-bg{position:absolute;inset:0;z-index:-1;background:url(assets/hero-advogados.jpg) right top/cover no-repeat}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--paper) 0%,rgba(243,239,230,.9) 34%,rgba(243,239,230,0) 58%),linear-gradient(0deg,var(--paper) 0%,rgba(243,239,230,0) 22%)}
+.hero-grid{flex:1}
+.hero-logo{display:block;height:92px;width:auto;margin-bottom:34px}
+@media (min-width:901px){
+  /* desktop: logo acima da headline e texto mais à esquerda */
+  .hero header{display:none}
+  .hero-grid{max-width:none;padding:40px 20px 0 clamp(20px,7vw,140px)}
+  .hero-grid>div:first-child{max-width:620px}
+  .hero .lead{max-width:540px;font-size:1.22rem}
+  .hero h1{font-size:clamp(2.6rem,3.5vw,3.5rem)}
+  .hero-grid>div:first-child{max-width:700px}
+}
+@media (max-width:900px){.hero-logo{display:none}}
 .placeholder{position:relative;aspect-ratio:4/5;display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(135deg,rgba(22,41,90,.06) 0 12px,rgba(22,41,90,.02) 12px 24px),#e6e0d3;border:1px dashed rgba(22,41,90,.35);color:var(--navy);font-family:"Cinzel",serif;font-size:.8rem;letter-spacing:.18em;padding:20px}
 .placeholder small{display:block;font-family:"Manrope";letter-spacing:0;font-size:.8rem;color:var(--muted);margin-top:6px;text-transform:none}
 
 /* ---------- 2. SITUAÇÕES (escura) ---------- */
 .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:52px 0 48px}
-.case{padding:28px 26px;border:1px solid rgba(226,194,127,.22);border-radius:4px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));text-align:left;transition:border-color .25s,transform .25s}
+.case{padding:28px 26px;border:1px solid rgba(185,138,62,.25);border-radius:4px;background:#fff;box-shadow:0 18px 40px -24px rgba(5,12,32,.6);text-align:left;transition:border-color .25s,transform .25s,box-shadow .25s}
 .case{display:block;position:relative;text-decoration:none;color:inherit;cursor:pointer}
-.case:hover{border-color:rgba(226,194,127,.55);transform:translateY(-3px);background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03))}
+.case:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 24px 50px -22px rgba(5,12,32,.75)}
 .case:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px}
-.case-wa{position:absolute;top:22px;right:22px;width:20px;height:20px;color:var(--gold-light);opacity:.35;transition:opacity .25s,color .25s}
-.case:hover .case-wa{opacity:1;color:#5fd17f}
-.case h3{font-family:"Cormorant Garamond",serif;font-size:1.55rem;font-weight:600;color:#f6efdd;margin-bottom:6px;display:flex;align-items:center;gap:12px}
-.case h3 i{font-style:normal;font-family:"Cinzel",serif;font-size:.8rem;color:var(--gold-light);letter-spacing:.1em}
-.case p{font-size:.95rem;color:#c9c3b4}
+.case-wa{position:absolute;top:22px;right:22px;width:20px;height:20px;color:var(--gold);opacity:.5;transition:opacity .25s,color .25s}
+.case:hover .case-wa{opacity:1;color:var(--wa)}
+.case h3{font-family:"Cormorant Garamond",serif;font-size:1.55rem;font-weight:600;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.case h3 i{font-style:normal;font-family:"Cinzel",serif;font-size:.8rem;color:#93682a;letter-spacing:.1em}
+.case p{font-size:.95rem;color:var(--muted)}
 .tex-dark .lead{color:#d3ccbc}
 
-/* ---------- 3. QUEM ATENDE (clara) ---------- */
+/* ---------- 3. QUEM ATENDE (branca) ---------- */
+.sec-white{background:#fff}
+.sec-white::before,.sec-white::after{display:none}
 .about{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
 .team{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 .photo{position:relative}
@@ -162,12 +173,9 @@ footer img{height:64px;width:auto;margin:0 auto 16px}
   .about,.hero-grid{grid-template-columns:1fr;gap:48px}
   /* hero mobile: imagem antes do texto, tudo centralizado */
   .hero-grid{gap:28px;text-align:center}
-  .hero-media{order:-1;justify-self:center;width:auto;max-width:none}
-  .hero-media{width:calc(100% - 10px);max-width:420px}
-  .hero-media img{aspect-ratio:16/10;max-height:24vh;object-position:50% 45%}
-  .hero-media::before{inset:-8px -8px 8px 8px}
-  .hero .eyebrow{justify-content:center;gap:10px;letter-spacing:.16em;font-size:.72rem;white-space:nowrap}
-  .hero .eyebrow::before,.hero .eyebrow::after{content:"";width:24px;height:1px;background:var(--gold-grad);flex:none}
+  .hero-bg{bottom:auto;aspect-ratio:892/881;background-image:url(assets/hero-advogados-m.jpg);background-size:100% auto;background-position:center top}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(243,239,230,0) 52%,var(--paper) 90%)}
+  .hero-grid{padding-top:calc(min(100vw,900px)*.8 - 110px)}
   .hero .lead{margin-left:auto;margin-right:auto}
   .team{max-width:520px;padding-left:10px}
 }
@@ -176,7 +184,7 @@ footer img{height:64px;width:auto;margin:0 auto 16px}
   .hero{padding-bottom:56px}
   .hero header{padding:18px 0 0}
   .hero header img{height:66px}
-  .hero-grid{padding-top:22px;gap:24px}
+  .hero-grid{padding-top:calc(80vw - 84px);gap:24px}
   .hero h1{font-size:min(1.95rem,8vw);margin:12px 0 12px}
   .hero .lead{font-size:.97rem;margin-bottom:20px}
   .cases{grid-template-columns:1fr;gap:12px;margin:36px 0}
@@ -200,18 +208,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ============ 1. HERO — imagem de fundo ============ -->
 <section class="hero tex-light">
+  <div class="hero-bg" role="img" aria-label="Dra. Eduarda Queregatte e Dr. Leonardo Antenucci Cunha"></div>
   <header><div class="wrap"><img src="assets/logo.png" alt="Antenucci & Queregatte Advogados" width="689" height="305"></div></header>
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow reveal">Direito de Família e Sucessões</p>
+      <img class="hero-logo reveal" src="assets/logo.png" alt="Antenucci & Queregatte Advogados" width="689" height="305">
       <h1 class="reveal">Divórcio, pensão ou guarda dos&nbsp;filhos? <em>Entenda seus direitos antes de assinar qualquer&nbsp;acordo.</em></h1>
       <p class="lead reveal">Cada situação familiar possui particularidades. A orientação jurídica permite compreender <strong>os direitos, deveres e possibilidades previstas na legislação</strong>.</p>
       <div class="reveal">
         <a class="btn js-wa" data-cta="hero" href="https://wa.me/5511930748565?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20advogado%20sobre%20uma%20quest%C3%A3o%20de%20fam%C3%ADlia." target="_blank" rel="noopener"><svg class="wa-ico" aria-hidden="true"><use href="#wa"/></svg>Contato pelo WhatsApp</a>
       </div>
-    </div>
-    <div class="hero-media reveal">
-      <picture><source media="(max-width:900px)" srcset="assets/hero-familia-m.jpg" width="960" height="600"><img src="assets/hero-familia.jpg" alt="Pessoa analisando documentos sobre uma mesa, ao lado de um desenho de família" width="960" height="1200" fetchpriority="high"></picture>
     </div>
   </div>
 </section>
@@ -219,7 +225,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============ 2. SITUAÇÕES — escura ============ -->
 <section class="tex-dark center">
   <div class="wrap">
-    <p class="eyebrow reveal">Como podemos ajudar</p>
     <h2 class="reveal">Em qual situação <em>você está?</em></h2>
     <p class="lead reveal" style="margin-top:16px">As regras mudam conforme o caso. Por isso, <strong>cada situação é analisada individualmente</strong>.</p>
     <div class="cases">
@@ -236,8 +241,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ============ 3. QUEM ATENDE + COMO FUNCIONA — clara ============ -->
-<section class="tex-light">
+<!-- ============ 3. QUEM ATENDE + COMO FUNCIONA — branca ============ -->
+<section class="tex-light sec-white">
   <div class="wrap">
     <div class="about">
       <div class="team">
@@ -246,12 +251,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <figcaption><strong>Dr. Leonardo Antenucci Cunha</strong>Direito de Família e Sucessões<!-- PENDENTE: OAB/UF nº --></figcaption>
         </figure>
         <figure class="photo reveal">
-          <img src="assets/dra.jpg" alt="Dra. Eduarda Queregatte" width="760" height="950" loading="lazy">
+          <img src="assets/dra.jpg" alt="Dra. Eduarda Queregatte" width="1024" height="1536" loading="lazy">
           <figcaption><strong>Dra. Eduarda Queregatte</strong>Direito de Família e Sucessões<!-- PENDENTE: OAB/UF nº --></figcaption>
         </figure>
       </div>
       <div>
-        <p class="eyebrow reveal">Quem vai te atender</p>
         <h2 class="reveal">Atuação em <em>Direito de Família e Sucessões.</em></h2>
         <p class="lead reveal">Você não precisa decidir no escuro. Nossos advogados analisam a sua situação, explicam quais regras se aplicam e <strong>esclarecem as possibilidades jurídicas aplicáveis a cada situação</strong>.</p>
         <ul class="checks reveal">
@@ -275,7 +279,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============ 4. DÚVIDAS + CTA FINAL — escura ============ -->
 <section class="tex-dark center">
   <div class="wrap">
-    <p class="eyebrow reveal">Dúvidas comuns</p>
     <h2 class="reveal">Antes de falar com a gente</h2>
     <div class="faq reveal">
       <details>
